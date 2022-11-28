@@ -1,5 +1,5 @@
 BEGIN 	{
-	OFS=",";
+	OFS=" ";
 	ORS=""; #remove ORS bc we don't want automatic \n
 
 	#This only works when you read toolchain.cmake under arch/ not build/
@@ -12,13 +12,16 @@ BEGIN 	{
 	}
 
 $1 ~ /Fortran/ {
+	$1=""
 	if (length($3) == 0) { #the first flag will not be appended
-		flag=substr($2, 1, length($2)-2)
-		print substr(flag, 2, length(flag)) " "
+		flag=substr($0, 1, length($0)-2)
+		print substr(flag, 3, length(flag)) " "
 		}
 	else {
 		#the third field contains the flag, subtract the final 2 chars from the end bc they're ")
-		print substr($3, 1, length($3)-2) " " 
+		$2=""
+		flag=substr($0, 1, length($0)-2) " "
+		print substr(flag, 3, length(flag)) #remove first 2 chars bc they're leading spaces
 		}
 }
 
