@@ -1,0 +1,9 @@
+Example of build commands used:
+	./cloudsc-bundle build --with-mpi --single-precision --arch arch/ecmwf/hpc2020/intel/2021.4.0/env.sh
+	./cloudsc-bundle build --with-mpi --arch arch/ecmwf/hpc2020/intel/2021.4.0/env.sh	
+	./cloudsc-bundle build --with-mpi --single-precision --arch arch/ecmwf/hpc2020/gnu/9.3.0/env.sh #choice of 9.3.0 not arbitrary bc 11.2.0 env.sh is blank
+	./cloudsc-bundle build --with-mpi --arch arch/ecmwf/hpc2020/gnu/9.3.0/env.sh
+
+
+To filter an output file to just the total runtime for a given run use:
+	cat [FILE.out] | grep "^thread_count \d\|TOTAL\$"
