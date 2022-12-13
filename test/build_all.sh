@@ -24,6 +24,8 @@ for arch in "${ARCH_FILES[@]}"; do
 		echo "moving the build dir to $subdir"
 		mkdir -p test/build/$arch$flags #build the directory if it hasn't already been built
 		rm -rf test/build/$arch$flags/* #clean the subdirectory contents to be safe
+		rm build/backup* #delete these annoying backup folders before they pile up
 		mv build/* test/build/$subdir/
+
 	done
 done
