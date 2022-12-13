@@ -8,7 +8,7 @@
 
 #setup enviorment by loading modules and setting constants
 source /ec/res4/hpcperm/naco/moria/dwarf-p-cloudsc/build/env.sh
-#source  /ec/res4/hpcperm/naco/moria/dwarf-p-cloudsc/arch/ecmwf/hpc2020/gnu/9.3.0/env.sh
+awk -f get_flags.awk /ec/res4/hpcperm/naco/moria/dwarf-p-cloudsc/build/toolchain.cmake
 CPUS_PER_NUMA_REGION=16
 CPUS_PER_SOCKET=64
 CPUS_PER_NODE=128

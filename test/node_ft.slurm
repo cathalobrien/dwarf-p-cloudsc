@@ -9,6 +9,7 @@
 #setup enviorment by loading modules and setting constants
 #need to make some sort of way to automatically select the correct arch
 source /ec/res4/hpcperm/naco/moria/dwarf-p-cloudsc/build/env.sh
+awk -f get_flags.awk /ec/res4/hpcperm/naco/moria/dwarf-p-cloudsc/build/toolchain.cmake #get the flags used for the current compiler version
 #source  /ec/res4/hpcperm/naco/moria/dwarf-p-cloudsc/arch/ecmwf/hpc2020/gnu/9.3.0/env.sh
 CPUS_PER_NUMA_REGION=16
 CPUS_PER_SOCKET=64
