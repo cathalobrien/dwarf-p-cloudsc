@@ -5,7 +5,7 @@
 #this script should be called from cloudsc/test
 cd /ec/res4/hpcperm/naco/moria/dwarf-p-cloudsc #move into cloudsc/ for ./cloudsc-bundle
 
-ARCH_FILES=("ecmwf/hpc2020/gnu/9.3.0" "ecmwf/hpc2020/intel/2021.4.0")
+ARCH_FILES=("ecmwf/hpc2020/gnu/8.5.0" "ecmwf/hpc2020/intel/2021.4.0")
 BUILD_FLAGS=("" "--single-precision") #a binary will be built with each of these flags (single and double precision in this case)
 for arch in "${ARCH_FILES[@]}"; do
         for flags in "${BUILD_FLAGS[@]}"; do
@@ -19,7 +19,7 @@ for arch in "${ARCH_FILES[@]}"; do
 		#an alternative way would be to give each flag setting a number so you end up with $arch_0, $arch_1 ....
 
 		#build the requested arch
-                ./cloudsc-bundle build --clean --with-mpi $flags --arch $arch \
+                ./cloudsc-bundle build --clean --with-mpi $flags --arch ./arch/$arch \
 			--build-dir test/build/$subdir
 
 	done
