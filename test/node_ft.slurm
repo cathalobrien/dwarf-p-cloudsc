@@ -11,20 +11,19 @@ root="/ec/res4/hpcperm/naco/moria/dwarf-p-cloudsc/test"
 CPUS_PER_NUMA_REGION=16
 CPUS_PER_SOCKET=64
 CPUS_PER_NODE=128
-#NUM_THREADS=($CPUS_PER_NUMA_REGION $CPUS_PER_SOCKET $CPUS_PER_NODE)
-NUM_THREADS=($CPUS_PER_NODE)
+NUM_THREADS=($CPUS_PER_NUMA_REGION $CPUS_PER_SOCKET $CPUS_PER_NODE)
 
 #set some runtime parameters
 export OMP_SCHEDULE=dynamic
 NCOLS=1310720
 NPROMA_SIZES=(32)
-iterations=1
+iterations=3
 
 #openmp x mpi geometry (how many tasks vs threads will be used)
 THREAD_TASK_RATIO=(4) #how many threads each task will be allocated, 16 is the max bc you don't want a task spanning multiple NUMA regions
 
 #benchmark different builds
-ARCH_FILES=("ecmwf/hpc2020/gnu/9.3.0" "ecmwf/hpc2020/intel/2021.4.0")
+ARCH_FILES=("ecmwf/hpc2020/gnu/8.5.0" "ecmwf/hpc2020/intel/2021.4.0")
 BUILD_FLAGS=("" "--single-precision")
 
 #launch the runs
