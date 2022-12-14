@@ -31,17 +31,18 @@ BUILD_FLAGS=("" "--single-precision")
 echo "*	NUMOMP    NGPTOT  #GP-cols     #BLKS    NPROMA tid# : Time(msec)  MFlops/s"
 for arch in "${ARCH_FILES[@]}"; do
 	for flags in "${BUILD_FLAGS[@]}"; do
-		subdirectory="build/$arch$build/" 
+		echo "benchmarking cloudsc built for $arch with the following flags: $flags"
+		subdirectory="build/$arch$flags/" 
 		cd $root/$subdirectory
 		#get flags and load the correct modules
 		source env.sh
-		awk -f get_flags.awk toolchain.cmake
+		awk -f $root/get_flags.awk toolchain.cmake
 		for thread_count in "${NUM_THREADS[@]}"; do
 			for threads_per_task in "${THREAD_TASK_RATIO[@]}"; do
 				ntasks=$(expr $thread_count / $threads_per_task)
 				for NP in "${NPROMA_SIZES[@]}"; do
 					for ((i = 0 ; i < $iterations ; i++)); do
-						echo "thread_count $thread_count ntasks $ntasks threads_per_task $threads_per_task nproma $NP arch $arch flag $flag"
+						echo "thread_count $thread_count ntasks $ntasks threads_per_task $threads_per_task ncols $NCOLS nproma $NP arch $arch flag $flags"
 						srun --hint=nomultithread --cpus-per-task=$threads_per_task \
 							--ntasks=$ntasks env OMP_NUM_THREADS=$threads_per_task env OMP_PLACES=cores \
 							bin/dwarf-cloudsc-fortran $threads_per_task $NCOLS $NP
